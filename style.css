@@ -1,0 +1,271 @@
+/* ESPECIAL INVESTIGATIVO — estilos da página */
+/* VARIÁVEIS GLOBAIS: cores (--ink fundo, --red/--ouro destaques, --paper cartões claros), fontes (--d títulos, --s texto) e margem lateral (--gut) */
+:root{--ink:#0E1116;--ink2:#171B22;--paper:#EFF0F2;--ouro:#FF2A1F;--red:#D90B00;--doc:#2FB36D;--inv:#C9CDD3;--dec:#4C7DF0;--mut:#9AA3AF;--bd:rgba(255,255,255,.16);
+--d:'Bricolage Grotesque','Arial Narrow',Impact,sans-serif;--s:'Source Serif 4',Georgia,serif;--gut:max(20px,calc((100vw - 1100px)/2))}
+/* RESET: remove margens/espaços padrão e faz o padding contar dentro da largura */
+*{box-sizing:border-box;margin:0;padding:0}
+/* PÁGINA: fundo escuro, rolagem suave ao clicar em âncoras e sem barra horizontal */
+html{scroll-behavior:smooth;background:var(--ink);overflow-x:clip;-webkit-text-size-adjust:100%}
+/* TEXTO BASE: fonte serifada, cor clara e quebra de palavras longas */
+body{background:var(--ink);color:#F4F4F2;font:400 1.1rem/1.62 var(--s);overflow-x:clip;overflow-wrap:break-word;-webkit-tap-highlight-color:transparent}
+/* Imagens nunca passam da largura da tela; links usam a cor de destaque */
+img{max-width:100%}
+a{color:var(--ouro)}
+/* ACESSIBILIDADE: contorno visível ao navegar pelo teclado */
+:focus-visible{outline:3px solid var(--ouro);outline-offset:3px}
+/* Elementos decorativos antigos, escondidos */
+.grain,.hero-grain,.rail{display:none}
+/* BARRA DE PROGRESSO no topo: o JavaScript estica ela conforme você rola a página */
+#bar{position:fixed;top:0;left:0;height:4px;width:100%;background:var(--ouro);transform:scaleX(0);transform-origin:0 50%;z-index:50}
+/* Animação de entrada: o bloco sobe 20px enquanto aparece */
+@keyframes up{from{opacity:0;transform:translateY(20px)}}
+/* HERO */
+/* HERO (primeira dobra): imagem + título empilhados no celular */
+.hero{display:flex;flex-direction:column;background:var(--ink)}
+/* Moldura da foto do hero (altura = 54% da tela) */
+.ph{position:relative;height:54svh;min-height:300px;overflow:hidden}
+/* Foto em preto e branco com mais contraste */
+.hero-img{display:block;width:100%;height:100%;object-fit:cover;object-position:38% 30%;filter:grayscale(1) contrast(1.15)}
+/* Degradê escuro sobre a foto para o texto ficar legível */
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,22,.55),transparent 30%,transparent 55%,var(--ink))}
+/* Etiqueta vermelha sobre a foto */
+.tag{position:absolute;z-index:2;left:20px;top:calc(env(safe-area-inset-top,0px) + 16px);font:800 .95rem/1 var(--d);letter-spacing:.06em;background:var(--red);color:#fff;padding:.5rem .7rem;text-transform:uppercase}
+/* Bloco do título do hero, sobreposto à foto e com animação de entrada */
+.slab{padding:0 20px calc(env(safe-area-inset-bottom,0px) + 2rem);margin-top:-3.5rem;position:relative;z-index:2;animation:up .7s .2s both}
+/* TÍTULO PRINCIPAL: fonte condensada e grande, fluida conforme a tela */
+h1{font:800 clamp(2.5rem,12.5vw,4rem)/.98 var(--d);font-stretch:80%;letter-spacing:-.01em}
+h1 span{display:block}
+/* Trecho do título com marca-texto vermelho */
+h1 em{font-style:normal;color:#fff;background:linear-gradient(transparent 6%,var(--red) 6%,var(--red) 96%,transparent 96%);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* Subtítulo do hero */
+.sub{margin-top:1rem;max-width:34rem;color:#D8DBE0;font-size:1.08rem}
+/* Linha dos botões do hero */
+.cta{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:center;margin-top:1.3rem}
+/* BOTÃO PRINCIPAL: vermelho, grande, com sombra sólida que dá efeito 3D */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:.9rem 1.4rem;width:100%;background:var(--red);color:#fff;font:800 1.15rem/1.15 var(--d);text-align:center;text-decoration:none;box-shadow:0 5px 0 #6E0400}
+/* Efeito de "apertar" o botão ao clicar */
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #6E0400}
+/* Link secundário (sublinhado discreto) */
+.ghost{display:inline-flex;align-items:center;min-height:44px;color:var(--mut);font:700 1rem var(--d);text-decoration:none;border-bottom:2px solid var(--bd)}
+/* Nota pequena em itálico */
+.note{margin-top:1rem;font:italic 400 .92rem/1.4 var(--s);color:var(--mut)}
+.scroll{display:none}
+/* SECTIONS */
+/* SEÇÕES: espaçamento padrão das seções de conteúdo */
+.wrap{padding:56px var(--gut)}
+/* FRASES DE GANCHO: blocos de texto grande entre as seções */
+.hook{min-height:46svh;display:flex;align-items:center;padding:9svh var(--gut)}
+.hook>div{max-width:34rem}
+.hook p{font:800 clamp(1.9rem,8vw,3.6rem)/1.05 var(--d);font-stretch:80%;max-width:18ch}
+.hook p b{font-weight:800;background:linear-gradient(transparent 6%,var(--red) 6%,var(--red) 96%,transparent 96%);color:#fff;padding:0 .1em}
+.hook p+p{margin-top:1.3rem}
+.hook .sm{font:400 1.1rem/1.5 var(--s);color:#D8DBE0}
+.hook .ser{font:italic 400 1.3rem/1.4 var(--s)}
+/* Variação do gancho em itálico serifado */
+.hook.s p{font:italic 400 clamp(1.4rem,5.5vw,2.4rem)/1.25 var(--s);max-width:26ch}
+.hook .ghost{margin-top:1.4rem}
+/* TÍTULOS DE SEÇÃO */
+h2{font:800 clamp(1.9rem,8vw,3rem)/1.02 var(--d);font-stretch:85%;margin-bottom:1rem;max-width:20ch}
+/* Rótulo pequeno acima do título */
+.kicker{display:inline-block;font:800 1.05rem/1 var(--d);padding-left:.6rem;border-left:5px solid var(--ouro);margin-bottom:.8rem;color:var(--ouro)}
+/* Texto de apoio e frase de fechamento da seção */
+.lead{color:#D8DBE0;max-width:40rem}
+.end{margin-top:1.8rem;font:800 clamp(1.3rem,5.5vw,1.8rem)/1.15 var(--d);color:#fff}
+/* LINHA DO TEMPO: lista com linha vertical à esquerda */
+.tl{list-style:none;border-left:2px solid var(--bd);margin:1.6rem 0 0 6px;padding-left:1.4rem;max-width:40rem}
+/* Cada item da linha do tempo */
+.tl li{position:relative;padding-bottom:1.8rem}
+/* Bolinha vermelha de cada marco */
+.tl li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:1rem;width:12px;height:12px;border-radius:50%;background:var(--ouro)}
+/* Ano em destaque */
+.tl b{display:block;font:800 clamp(2.4rem,11vw,3.8rem)/1 var(--d);color:var(--ouro)}
+.tl p{color:#E3E5E9}
+.tl small,.src{display:block;margin-top:.6rem;font:italic 400 .9rem/1.5 var(--s);color:var(--mut)}
+.src a,#fontes a{color:#D8DBE0;text-decoration:underline}
+/* "Pílulas" com etiquetas (Metalúrgico, Sindicalismo...) */
+.pills{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:1.2rem 0 .6rem}
+.pills li{border:2px solid var(--ouro);padding:.45rem .8rem;font:700 1rem var(--d)}
+.sub2{font:800 1.3rem/1.2 var(--d);margin-top:2rem}
+/* CARTÕES: grade que vira 2 ou 3 colunas em telas maiores */
+.cards,.c2,.c3{display:grid;gap:14px;margin-top:1.6rem}
+/* Cartão claro com borda colorida no topo */
+.card{background:var(--paper);color:var(--ink);border-top:6px solid #777;padding:1.1rem 1.1rem 1.3rem}
+/* Cor da borda por tipo: verde = documentado, vermelho = alegado, azul = decisão */
+.card.k{border-color:var(--doc)}
+.card.a{border-color:var(--red)}
+.card.j{border-color:var(--dec)}
+.card h3{font:800 1.15rem/1.1 var(--d);margin-bottom:.5rem}
+.card p{font-size:1.02rem;color:#2A313B}
+/* Frase gigante de impacto (ex.: ACUSAÇÃO ≠ CONDENAÇÃO) */
+.big{font:800 clamp(2rem,9.5vw,4rem)/1 var(--d);font-stretch:80%;margin:1.2rem 0}
+.big i{font-style:normal;background:var(--red);color:#fff;padding:0 .15em}
+/* Legenda das etiquetas Documentado/Investigado/Contestado */
+.legend{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}
+/* Etiqueta colorida (selo) */
+.t{display:inline-block;font:800 .85rem/1 var(--d);letter-spacing:.06em;text-transform:uppercase;padding:.35rem .55rem;color:#fff;background:#1E8A53;margin-bottom:.6rem}
+.legend .t{margin:0}
+.t.i{background:var(--inv);color:var(--ink)}
+.t.c{background:#C23A30}
+/* FATO OU NARRATIVA: caixas que abrem e fecham (<details>) */
+.fc{background:var(--paper);color:var(--ink);margin:.8rem 0}
+/* Parte clicável da caixa; o "+" fica à direita */
+.fc summary{list-style:none;cursor:pointer;position:relative;padding:1.1rem 3rem 1.1rem 1.1rem;font:400 1.15rem/1.35 var(--s);min-height:60px}
+.fc summary::-webkit-details-marker{display:none}
+.fc summary::after{content:"+";position:absolute;right:1rem;top:1rem;font:800 1.8rem/1 var(--d)}
+/* Troca o "+" por "−" quando a caixa está aberta */
+.fc[open] summary::after{content:"−"}
+.fc em{display:block;margin-top:.7rem;font:800 .9rem var(--d);font-style:normal;color:#B3261E;letter-spacing:.06em}
+.fc dl{padding:0 1.1rem 1.1rem}
+.fc dt{font:800 .85rem var(--d);letter-spacing:.06em;text-transform:uppercase;color:#B3261E;margin-top:.8rem}
+.fc dd{color:#2A313B}
+/* Seção de fundo preto com frase de impacto */
+.black{min-height:64svh;display:flex;flex-direction:column;justify-content:center;padding:10svh var(--gut);background:#000}
+.black p:first-child{font:800 clamp(2rem,9vw,4.2rem)/1.02 var(--d);font-stretch:80%;max-width:16ch}
+.black .sm{margin-top:1.4rem;max-width:28rem;color:#D8DBE0}
+/* Lista de perguntas com linhas divisórias */
+.qs{list-style:none;margin-top:1.4rem;max-width:34rem}
+.qs li{font:800 1.3rem/1.2 var(--d);padding:.8rem 0;border-top:1px solid var(--bd)}
+/* ANIMAÇÃO AO ROLAR: elementos .rv começam invisíveis e aparecem quando entram na tela (o JS adiciona a classe .in) */
+.rv{transition:opacity .6s,transform .6s}
+.js .rv{opacity:0;transform:translateY(16px)}
+.js .rv.in{opacity:1;transform:none}
+/* OFERTA */
+/* Seção "É material de um lado só?" */
+.trust{background:var(--ink2)}
+.trust .card{border-top-color:var(--ouro)}
+/* SEÇÃO DA OFERTA: fundo claro com a capa do ebook e a lista de benefícios */
+.offer{background:var(--paper);color:var(--ink);padding:64px var(--gut)}
+.offer h2{max-width:16ch}
+.offer .lead{color:#2A313B}
+/* Capa do ebook inclinada, com sombra sólida */
+.ebook{width:min(210px,58vw);aspect-ratio:3/4;margin:0 0 2.2rem 8px;transform:rotate(-3deg);box-shadow:10px 10px 0 var(--ouro)}
+/* Layout interno da capa */
+.cover{height:100%;background:var(--ink);color:#fff;border-left:12px solid var(--ouro);padding:1rem;display:flex;flex-direction:column;justify-content:space-between}
+.cover small{font:800 .8rem var(--d);letter-spacing:.06em;text-transform:uppercase;color:var(--ouro)}
+.cover b{font:800 1.5rem/1 var(--d);font-stretch:80%}
+.cover i{font:italic 400 .85rem/1.3 var(--s);color:var(--mut)}
+/* Lista de benefícios com ✓ (bolinha escura) */
+.chk{list-style:none;display:grid;gap:0;margin-top:1.2rem}
+.chk li{border-top:1px solid #C9CDD3;padding:.7rem 0 .7rem 2rem;position:relative}
+.chk li::before{content:"✓";position:absolute;left:0;top:.75rem;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--ink);color:var(--ouro);font:800 .8rem/1.35rem var(--d);text-align:center}
+/* Bloco de preço + botão na oferta */
+.buy{margin-top:1.8rem}
+/* Preço em vermelho */
+.price{font:800 clamp(2rem,9vw,3rem)/1 var(--d)}
+/* Botão da oferta em preto, para contrastar com o fundo claro */
+.offer .btn{background:var(--ink);color:#fff;box-shadow:0 5px 0 var(--red);margin-top:1rem}
+/* Texto pequeno abaixo do botão */
+.micro{margin-top:1rem;font:italic 400 .95rem var(--s);color:#4A5260}
+/* (Sem uso) estilos da antiga seção final, substituída pelo checkout */
+.final{position:relative;padding:12svh var(--gut);display:flex;flex-direction:column;gap:1.4rem;background:#000;overflow:hidden;isolation:isolate}
+/* (Sem uso) fundo da antiga seção final */
+.fbg{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:36% 20%;opacity:.16;filter:grayscale(1) contrast(1.2)}
+.final .big{margin:0}
+.final .sm{max-width:30rem;color:#D8DBE0}
+.final .sm b{color:#fff}
+.final .btn{margin-top:.4rem}
+/* Seção de fontes no rodapé */
+#fontes{padding:56px var(--gut) 72px}
+#fontes .lead{margin-top:.6rem}
+/* Rodapé, com espaço extra embaixo para o botão fixo não cobrir o texto */
+footer{padding:0 var(--gut) calc(env(safe-area-inset-bottom,0px) + 100px);font:italic 400 .9rem var(--s);color:var(--mut)}
+/* BOTÃO FIXO: escondido por padrão (aparece só no celular, veja o @media abaixo) */
+#fcta{display:none}
+/* CELULAR/TABLET: o botão fixo fica colado embaixo da tela e desliza para dentro quando a classe .on é ativada */
+@media(max-width:899px){
+  #fcta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:auto;z-index:45;transform:translateY(180%);transition:transform .4s;box-shadow:0 5px 0 #6E0400,0 14px 28px #000a}
+  #fcta.on{transform:none}
+}
+/* TELAS MÉDIAS: cartões e benefícios em 2 e 3 colunas */
+@media(min-width:640px){
+  .c2{grid-template-columns:1fr 1fr}
+  .c3{grid-template-columns:repeat(3,1fr)}
+  .chk{grid-template-columns:1fr 1fr;column-gap:2rem}
+}
+/* DESKTOP: hero em 2 colunas (texto + foto), oferta lado a lado e botões com largura automática */
+@media(min-width:900px){
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:100svh}
+  .slab{order:1;margin:0;padding:60px 4vw 60px var(--gut);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+  .ph{order:2;height:auto;min-height:0}
+  .ph::after{background:linear-gradient(90deg,var(--ink),transparent 35%)}
+  .tag{left:auto;right:4vw}
+  h1{font-size:clamp(3.4rem,6vw,6rem)}
+  .btn{width:auto;padding:.9rem 2rem}
+  .wrap{padding:88px var(--gut)}
+  .offer{display:grid;grid-template-columns:260px 1fr;gap:0 64px;align-items:start;padding:96px var(--gut)}
+  .ebook{margin-top:1rem}
+  .final{padding:14svh var(--gut)}
+  .final .btn{align-self:flex-start}
+}
+/* TELAS MUITO PEQUENAS: fontes um pouco menores */
+@media(max-width:360px){
+  .btn{font-size:1.05rem}
+  .tl b{font-size:2.2rem}
+}
+/* ACESSIBILIDADE: quem desativa animações no sistema não vê movimento */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}
+/* TÍTULOS EM MAIÚSCULAS (ajuste de estilo final) */
+h1,h2,.hook p,.black p:first-child,.end,.big{text-transform:uppercase}
+.kicker{background:var(--red);color:#fff;border:0;padding:.4rem .6rem}
+.hero-img{filter:grayscale(1) contrast(1.35)}
+/* Camada vermelha sobre a foto do hero */
+.ph::before{content:"";position:absolute;inset:0;z-index:1;background:#C40800;mix-blend-mode:multiply;opacity:.6}
+.tag{top:16px;z-index:3}
+/* FAIXA ROLANTE vermelha no topo da página */
+.ticker{position:relative;z-index:5;background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;padding:calc(env(safe-area-inset-top,0px) + .55rem) 0 .55rem;font:800 .95rem/1 var(--d);letter-spacing:.06em;text-transform:uppercase}
+/* Faixa que se move infinitamente para a esquerda */
+.tk{display:flex;width:max-content;animation:tk 30s linear infinite}
+.tk span{padding-right:2rem}
+/* Animação da faixa rolante */
+@keyframes tk{to{transform:translateX(-50%)}}
+/* Faixa listrada vermelha/preta usada como divisor */
+.strip{height:16px;background:repeating-linear-gradient(-45deg,var(--red) 0 16px,#000 16px 32px)}
+.final{background:linear-gradient(180deg,#000,#4A0200)}
+.final .big{color:#fff;text-shadow:3px 3px 0 var(--red)}
+.price{color:var(--red)}
+@media(prefers-reduced-motion:reduce){
+  .tk{animation:none}
+}
+/* CHECKOUT */
+/* CHECKOUT: seção final de compra com fundo escuro avermelhado */
+.checkout{position:relative;padding:12svh var(--gut);background:linear-gradient(180deg,#000,#4A0200);isolation:isolate;overflow:hidden}
+.checkout .fbg{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:36% 20%;opacity:.14;filter:grayscale(1) contrast(1.2)}
+/* Duas colunas no desktop: argumentos à esquerda, cartão de compra à direita */
+.ck-grid{display:grid;gap:2rem;align-items:start}
+/* Título do checkout */
+.checkout h2{max-width:14ch;color:#fff;text-shadow:3px 3px 0 var(--red)}
+.ck-list{list-style:none;margin-top:1.2rem;max-width:30rem}
+.ck-list li{border-top:1px solid var(--bd);padding:.7rem 0;color:#E3E5E9}
+.ck-list b{color:#fff}
+/* CARTÃO DE COMPRA: caixa clara com borda vermelha e sombra */
+.ck-card{background:var(--paper);color:var(--ink);padding:1.4rem 1.2rem 1.5rem;border-top:8px solid var(--red);box-shadow:8px 8px 0 #000}
+.ck-name {font:800 1.1rem/1.1 var(--d)}
+.ck-from{margin-top:.9rem;color:#4A5260;font:400 1rem var(--s)}
+.ck-from s{text-decoration-thickness:2px}
+/* Preço grande (preenchido pelo JavaScript) */
+.ck-price{font:800 clamp(2.6rem,12vw,3.8rem)/1 var(--d);color:var(--red);font-stretch:80%}
+/* Parcelamento (calculado pelo JavaScript) */
+.ck-inst{margin-top:.3rem;font:700 1rem var(--d);color:#2A313B}
+/* Contagem regressiva: só aparece quando a classe .on é adicionada */
+.ck-left{display:none;margin-top:1rem;background:var(--ink);color:#fff;padding:.6rem .8rem;font:700 .95rem/1.3 var(--d)}
+.ck-left.on{display:block}
+.ck-left b{color:#FF6A60;font-variant-numeric:tabular-nums}
+/* Botão "Comprar agora", maior e em largura total */
+.checkout .btn{width:100%;margin-top:1.1rem;background:var(--red);box-shadow:0 5px 0 #6E0400;font-size:1.25rem;min-height:64px;border:0;cursor:pointer}
+/* Estado de carregamento do botão após o clique */
+.btn.load{pointer-events:none;opacity:.8}
+/* Selos das formas de pagamento (Pix, Cartão, Boleto) */
+.ck-meth{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+.ck-meth li{border:2px solid var(--ink);padding:.25rem .6rem;font:800 .85rem var(--d)}
+/* Texto da garantia */
+.ck-safe{margin-top:1rem;font:italic 400 .92rem/1.45 var(--s);color:#4A5260}
+.ck-safe b{font-style:normal;color:var(--ink)}
+/* Aviso de pagamento seguro */
+.ck-sec{margin-top:.8rem;font:700 .85rem var(--d);color:#4A5260}
+@media(min-width:900px){
+  .ck-grid{grid-template-columns:1.05fr .95fr;gap:4rem}
+  .checkout .btn{width:100%}
+}
