@@ -1,4 +1,4 @@
-/* ESPECIAL INVESTIGATIVO — estilos da página */
+    /* ESPECIAL INVESTIGATIVO — estilos da página */
 /* VARIÁVEIS GLOBAIS: cores (--ink fundo, --red/--ouro destaques, --paper cartões claros), fontes (--d títulos, --s texto) e margem lateral (--gut) */
 :root{--ink:#0E1116;--ink2:#171B22;--paper:#EFF0F2;--ouro:#FF2A1F;--red:#D90B00;--doc:#2FB36D;--inv:#C9CDD3;--dec:#4C7DF0;--mut:#9AA3AF;--bd:rgba(255,255,255,.16);
 --d:'Bricolage Grotesque','Arial Narrow',Impact,sans-serif;--s:'Source Serif 4',Georgia,serif;--gut:max(20px,calc((100vw - 1100px)/2))}
@@ -267,5 +267,152 @@ h1,h2,.hook p,.black p:first-child,.end,.big{text-transform:uppercase}
 .ck-sec{margin-top:.8rem;font:700 .85rem var(--d);color:#4A5260}
 @media(min-width:900px){
   .ck-grid{grid-template-columns:1.05fr .95fr;gap:4rem}
-  .checkout .btn{width:100%}
+  .checkout .btn{width:100%}}
+
+/* ===== VERSÃO CHAMATIVA (mesma identidade: preto, vermelho, Bricolage + Source Serif) ===== */
+:root{--img:url(hero.png)}
+@keyframes pulse{0%{box-shadow:0 5px 0 var(--sh),0 0 0 0 var(--pc)}70%{box-shadow:0 5px 0 var(--sh),0 0 0 22px transparent}100%{box-shadow:0 5px 0 var(--sh),0 0 0 0 transparent}}
+@keyframes shine{0%{transform:translateX(-120%) skewX(-20deg)}60%,100%{transform:translateX(420%) skewX(-20deg)}}
+@keyframes nudge{50%{transform:translateX(6px)}}
+@keyframes kb{to{scale:1.1}}
+@keyframes beat{0%,100%{opacity:.15}50%{opacity:.9}}
+@keyframes flick{0%,90%,100%{opacity:1}92%{opacity:.4}94%{opacity:1}97%{opacity:.55}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes wob{0%,84%,100%{rotate:0deg}88%{rotate:-14deg}92%{rotate:14deg}96%{rotate:-8deg}}
+/* botões: pulsam e brilham */
+.btn{--sh:#6E0400;--pc:rgba(217,11,0,.7);position:relative;overflow:hidden;animation:pulse 1.8s infinite}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:shine 3s infinite}
+.offer .btn{--sh:var(--red);--pc:rgba(14,17,22,.55)}
+.btn.load{animation:none}
+.arr{display:inline-block;margin-left:.4rem;animation:nudge 1s infinite}
+/* hero: entrada em sequência, foto com zoom lento, lanterna e brilho */
+.slab{animation:none}
+.tag,.slab h1 span,.sub,.cta,.note{animation:up .7s both}
+.slab h1 span+span{animation-delay:.2s}.slab h1 span+span+span{animation-delay:.35s}.sub{animation-delay:.5s}.cta{animation-delay:.65s}.note{animation-delay:.8s}
+h1 em{animation:flick 5s 1.5s infinite}
+.pimg{position:absolute;inset:-6% 0;animation:kb 18s ease-in-out infinite alternate}
+.pimg .hero-img{position:absolute;inset:0}
+.lit{position:absolute;inset:0;background:var(--img) 38% 30%/cover no-repeat;filter:grayscale(1) contrast(1.3) brightness(2.4);-webkit-mask-image:radial-gradient(circle var(--r,110px) at var(--mx,50%) var(--my,45%),#000,transparent);mask-image:radial-gradient(circle var(--r,110px) at var(--mx,50%) var(--my,45%),#000,transparent)}
+.glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,42,31,.45),transparent 45%);animation:beat 2.4s ease-in-out infinite}
+@media(max-width:899px){.ph{height:38svh;min-height:200px;max-height:340px}.slab{margin-top:-2.5rem}h1{font-size:clamp(2.2rem,11vw,3.4rem)}}
+/* faixa rolante invertida */
+.tick{background:var(--ink);border-block:3px solid var(--red);overflow:hidden;white-space:nowrap}
+.tk2{display:inline-flex;padding:.7rem 0;font:800 1.05rem/1 var(--d);letter-spacing:.14em;color:#fff;animation:mq 26s linear infinite reverse}
+.tk2 span{padding-right:2rem}.tk2 span::after{content:"◆";margin-left:2rem;color:var(--ouro)}
+/* três pontas com cadeado */
+.teasers{display:grid;gap:14px;margin-top:1.6rem;grid-template-columns:minmax(0,1fr)}
+.tz{background:var(--ink2);border:1px solid var(--bd);border-top:5px solid var(--ouro);padding:1.2rem;transition:transform .25s}
+.tz:hover{transform:translateY(-4px)}
+.tz h3{font:800 1.5rem/1.05 var(--d);font-stretch:85%;text-transform:uppercase;margin-bottom:.6rem}
+.tz p{color:#D8DBE0;overflow-wrap:anywhere}
+.bigstat{font:800 clamp(3rem,14vw,4.2rem)/1 var(--d);font-stretch:80%;color:var(--ouro);margin-bottom:.4rem}
+a.lock{display:block;margin-top:.9rem;text-decoration:none;color:var(--mut);font:800 .95rem/1.3 var(--d)}
+.blur{display:inline-block;max-width:calc(100% - 2rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom;filter:blur(5px);user-select:none}
+.lk{display:inline-block;animation:wob 3s infinite}
+.unl{display:flex;align-items:center;justify-content:center;min-height:50px;margin-top:.8rem;background:var(--red);color:#fff;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 4px 0 #6E0400}
+.ctawrap{display:flex;flex-direction:column;align-items:center;margin-top:1.8rem}
+.ctawrap .btn{width:100%;max-width:640px;min-height:72px}
+.micro2{display:block;margin-top:.8rem;font:700 .85rem/1.4 var(--d);letter-spacing:.1em;color:var(--mut);text-transform:uppercase;text-align:center}
+.hot{display:inline-block;margin-bottom:.8rem;font:800 .9rem/1 var(--d);letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:.45rem .7rem}
+@media(min-width:900px){.teasers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* fundos com foto e paralaxe */
+.black{position:relative;overflow:hidden;isolation:isolate}
+.black::before{content:"";position:absolute;inset:-15% 0;z-index:-1;background:var(--img) 70% 20%/cover;opacity:.22;filter:grayscale(1) contrast(1.2);translate:0 calc(var(--py,0)*-.08px)}
+.checkout .fbg{inset:-15% 0;translate:0 calc(var(--py,0)*-.08px)}
+.line{height:6px;width:0;background:var(--ouro);margin-top:2rem;transition:width 1.2s}.line.in{width:100%}
+@media(prefers-reduced-motion:reduce){.btn,.pimg,.glow,.tk2,h1 em,.lk,.arr{animation:none!important}.btn::after{display:none}}
+
+/* ===== VERSÃO CURTA: foto original, textos borrados, links de pagamento ===== */
+.hero-img{filter:none;object-position:40% 30%}.ph::before{display:none}
+.lit{background-position:40% 30%;filter:brightness(1.9) contrast(1.1)}
+.veil{position:relative;margin-top:1.6rem;padding:1.2rem;border:1px solid var(--bd);background:var(--ink2);overflow:hidden}
+.veil .bl{filter:blur(6px);user-select:none;pointer-events:none;color:#D8DBE0}
+.veil .bl p+p{margin-top:.8rem}
+.lockbox{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;padding:1rem;background:linear-gradient(180deg,rgba(14,17,22,.2),rgba(14,17,22,.85));text-align:center}
+.lockbox b{font:800 1.3rem/1.1 var(--d);text-transform:uppercase}
+.lockbox .btn{width:auto;min-height:54px;padding:.6rem 1.4rem}
+.ck-card.one{max-width:620px;margin:1.6rem auto 0}
+.checkout h2{max-width:none;text-align:center}.checkout .hot{display:block;width:max-content;margin:0 auto .8rem}
+
+/* ===== SILHUETA FIXA EM TODO O SITE ===== */
+/* O body fica transparente para a silhueta (camada fixa atrás de tudo) aparecer; o fundo escuro vem do <html> */
+body{background:transparent}
+/* CAMADA DA SILHUETA: ocupa a tela inteira, fica parada enquanto a página rola e nunca recebe cliques */
+.sil{position:fixed;inset:0;height:100vh;height:100lvh;z-index:-1;pointer-events:none;overflow:hidden;background:var(--ink)}
+/* A foto em preto e branco, com contraste alto e opacidade baixa para virar silhueta */
+.sil::before{content:"";position:absolute;inset:0;background:var(--img) 40% 28%/cover no-repeat;filter:grayscale(1) contrast(1.3) brightness(.95);opacity:.36}
+/* Véu escuro com um brilho vermelho atrás do rosto, para o texto continuar legível */
+.sil::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 40% 38%,rgba(196,8,0,.26),transparent 62%),linear-gradient(180deg,rgba(14,17,22,.30),rgba(14,17,22,.72))}
+/* As seções deixam a silhueta aparecer: fundos sólidos viram semitransparentes */
+.tick{background:rgba(14,17,22,.72)}
+.black{background:rgba(0,0,0,.42)}
+.black::before{display:none}
+.checkout{background:linear-gradient(180deg,rgba(0,0,0,.30),rgba(74,2,0,.55))}
+.checkout .fbg{display:none}
+.tz{background:rgba(23,27,34,.80);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.veil{background:rgba(23,27,34,.74);min-height:170px}
+/* Sombra leve nos textos soltos sobre a silhueta, para ler bem */
+.wrap h2,.lead,.hook p,.black p,#fontes,footer{text-shadow:0 2px 14px rgba(0,0,0,.85)}
+/* ===== AJUSTES DE CELULAR ===== */
+@media(max-width:899px){
+  /* No celular a tela é alta e estreita: a silhueta fica um pouco mais forte e centrada no rosto */
+  .sil::before{background-position:38% 24%;opacity:.42}
+  .wrap{padding:44px max(18px,var(--gut))}
+  .tz{padding:1rem}
+  .tz h3{font-size:1.3rem}
+  .ctawrap .btn{min-height:64px;font-size:1.05rem}
+  .micro2{letter-spacing:.06em}
+  .veil{padding:1rem}
+  .lockbox b{font-size:1.1rem}
+  .checkout{padding:9svh max(18px,var(--gut))}
+  .ck-card.one{width:100%}
 }
+@media(max-width:380px){
+  h1{font-size:2.05rem}
+  .lockbox .btn{padding:.6rem 1rem;font-size:1rem}
+  .kicker{font-size:.95rem}
+}
+
+/* ===== SILHUETA MAIS FORTE (versão 2) ===== */
+/* Hero transparente: a foto do hero some e a silhueta fixa passa a ser a imagem da página inteira */
+.hero{background:transparent}
+.pimg,.ph::after{display:none}
+.ph{background:transparent}
+/* Silhueta mais visível */
+.sil::before{opacity:.62;filter:grayscale(1) contrast(1.35) brightness(1.05)}
+.sil::after{background:radial-gradient(ellipse at 45% 38%,rgba(217,11,0,.30),transparent 60%),linear-gradient(180deg,rgba(14,17,22,.12),rgba(14,17,22,.45))}
+/* Seções e cartões mais transparentes para a imagem aparecer */
+.tick{background:rgba(14,17,22,.55)}
+.black{background:rgba(0,0,0,.18)}
+.tz{background:rgba(14,17,22,.58)}
+.veil{background:rgba(14,17,22,.5)}
+.checkout{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(74,2,0,.40))}
+/* Texto sempre legível sobre a imagem */
+h1,.sub,.note,.tz p,.tz h3,.end,.kicker{text-shadow:0 2px 16px rgba(0,0,0,.9)}
+/* Desktop: a figura fica na metade direita, esmaecendo para a esquerda onde fica o texto */
+@media(min-width:900px){
+  .sil::before{inset:0 0 0 36%;background-size:cover;background-position:40% 22%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+  .sil::after{background:radial-gradient(ellipse at 68% 40%,rgba(217,11,0,.28),transparent 55%),linear-gradient(180deg,rgba(14,17,22,.12),rgba(14,17,22,.45))}
+}
+@media(max-width:899px){
+  .sil::before{opacity:.7;background-position:38% 20%}
+  .ph{height:30svh;min-height:150px}
+}
+/* ===== MOBILE (versão 3) ===== */
+@media(max-width:899px){
+  /* Hero ocupa a primeira tela inteira; o texto desce para a parte de baixo e a silhueta aparece em cima */
+  .hero{min-height:calc(100svh - 40px)}
+  .ph{flex:1 1 auto;height:auto;min-height:180px;max-height:none}
+  .slab{margin-top:0;padding-bottom:1.8rem}
+  .glow{display:none}
+  h1{font-size:clamp(2.3rem,13vw,3.6rem)}
+  /* Seções de frase de impacto mais compactas */
+  .hook{min-height:auto;padding:6svh var(--gut)}
+  .black{min-height:auto;padding:8svh var(--gut)}
+  .ticker{font-size:.85rem}
+  .tk2{font-size:.95rem}
+  /* Botão fixo não cobre o rodapé */
+  footer{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 110px)}
+}
+@media(max-width:380px){h1{font-size:2.2rem}}
